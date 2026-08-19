@@ -1,0 +1,4 @@
+a.hover-warning:hover {
+  color: #ffc107 !important;
+  transition: color 0.2s ease-in-out;
+}

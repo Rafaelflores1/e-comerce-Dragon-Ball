@@ -1,0 +1,42 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-body p-4">
+          <h2 class="card-title text-center mb-4 fw-bold text-primary">
+            <i class="bi bi-geo-alt-fill"></i> Nueva Dirección
+          </h2>
+          
+          <form #addressForm="ngForm" (ngSubmit)="guardarDireccion()">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Calle / Dirección</label>
+              <input type="text" class="form-control rounded-3" [(ngModel)]="nuevaDireccion.direccion" name="direccion" required placeholder="Ej: Calle Gran Vía 28" />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Ciudad</label>
+                <input type="text" class="form-control rounded-3" [(ngModel)]="nuevaDireccion.ciudad" name="ciudad" required placeholder="Ej: Madrid" />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-semibold">Código Postal</label>
+                <input type="text" class="form-control rounded-3" [(ngModel)]="nuevaDireccion.codigo_postal" name="codigo_postal" required placeholder="Ej: 28013" />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label fw-semibold">País</label>
+              <input type="text" class="form-control rounded-3" [(ngModel)]="nuevaDireccion.pais" name="pais" required placeholder="Ej: España" />
+            </div>
+
+            <div class="d-grid gap-2">
+              <button type="submit" class="btn btn-warning btn-lg fw-bold rounded-pill text-dark shadow-sm" [disabled]="!addressForm.form.valid">
+                <i class="bi bi-check2-circle"></i> Confirmar y Guardar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

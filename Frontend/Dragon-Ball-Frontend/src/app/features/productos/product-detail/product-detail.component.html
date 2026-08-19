@@ -1,0 +1,55 @@
+<div class="container my-5">
+  <a routerLink="/productos" class="btn btn-outline-secondary mb-4">
+    <i class="bi bi-arrow-left me-1"></i> Volver al Catálogo
+  </a>
+
+  @if (loading()) {
+    <div class="text-center my-5">
+      <div class="spinner-border text-warning" role="status">
+        <span class="visually-hidden">Cargando producto...</span>
+      </div>
+    </div>
+  } @else if (producto(); as prod) {
+    <div class="card border-0 shadow-lg p-4">
+      <div class="row g-4 align-items-center">
+        <!-- Imagen -->
+        <div class="col-md-5 text-center">
+          <img [src]="prod.imagen_url" [alt]="prod.nombre" class="img-fluid rounded p-3" style="max-height: 400px; object-fit: contain;">
+        </div>
+
+        <!-- Información -->
+        <div class="col-md-7">
+          <h2 class="fw-bold mb-3">{{ prod.nombre }}</h2>
+          <p class="text-muted fs-5 mb-3">{{ prod.descripcion }}</p>
+          
+          <div class="mb-4">
+            <span class="display-6 fw-bold text-success">{{ prod.precio | currency:'EUR' }}</span>
+          </div>
+
+          <!-- Selector de Cantidad y Botón -->
+          <div class="d-flex align-items-center gap-3 mb-4">
+            <label for="cantidad" class="fw-bold">Cantidad:</label>
+            <input 
+              type="number" 
+              id="cantidad" 
+              class="form-control text-center" 
+              style="width: 80px;" 
+              [ngModel]="cantidad()" 
+              (ngModelChange)="cantidad.set($event)"
+              min="1" 
+              max="99">
+            
+            <button class="btn btn-warning btn-lg fw-bold px-4" (click)="addToCart()">
+              <i class="bi bi-cart-plus me-1"></i> Añadir al Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <div class="alert alert-danger text-center my-5">
+      <h4>Producto no encontrado</h4>
+      <p>El producto solicitado no existe o no se pudo cargar.</p>
+    </div>
+  }
+</div>

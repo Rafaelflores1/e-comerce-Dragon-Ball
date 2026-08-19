@@ -1,0 +1,90 @@
+<div class="container py-5">
+  <!-- Información del Usuario -->
+  <div class="card bg-dark text-white mb-4 shadow">
+    <div class="card-body">
+      <h2 class="card-title text-warning mb-3">
+        <i class="bi bi-person-badge me-2"></i>Perfil de Guerrero
+      </h2>
+      @if (authService.currentUserSignal(); as usuario) {
+        <p class="card-text mb-1"><strong>Nombre:</strong> {{ usuario.nombre }}</p>
+        <p class="card-text mb-3"><strong>Email:</strong> {{ usuario.email }}</p>
+
+        <!-- Botón de Cerrar Sesión -->
+        <button class="btn btn-outline-danger btn-sm" (click)="authService.logout()">
+          <i class="bi bi-box-arrow-right me-1"></i> Cerrar Sesión
+        </button>
+      } @else {
+        <p class="text-muted">No hay información de usuario disponible.</p>
+      }
+    </div>
+  </div>
+
+  <!-- Historial de Pedidos -->
+  <div class="card bg-dark text-white shadow">
+    <div class="card-body">
+      <h3 class="card-title text-warning mb-4">
+        <i class="bi bi-clock-history me-2"></i>Historial de Pedidos
+      </h3>
+
+      @if (isLoading()) {
+        <div class="text-center py-4 text-muted">
+          <div class="spinner-border text-warning" role="status"></div>
+          <p class="mt-2">Cargando tus pedidos...</p>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="alert alert-danger" role="alert">
+          {{ errorMessage() }}
+        </div>
+      } @else if (pedidos().length === 0) {
+        <div class="text-center py-5">
+          <i class="bi bi-bag-x text-muted display-1"></i>
+          <p class="mt-3 fs-5 text-muted">Aún no has realizado ningún pedido.</p>
+          <a routerLink="/catalogo" class="btn btn-warning mt-2">
+            <i class="bi bi-cart-plus me-2"></i>Ir al Catálogo
+          </a>
+        </div>
+      } @else {
+        <div class="d-flex flex-column gap-3">
+          @for (pedido of pedidos(); track pedido.id) {
+            <div class="card bg-secondary text-white border-0">
+              <div class="card-header d-flex justify-content-between align-items-center bg-dark text-warning border-secondary">
+                <span class="fw-bold">Pedido #{{ pedido.id }}</span>
+                <span class="badge" [ngClass]="{
+                  'bg-warning text-dark': !pedido.estado || pedido.estado === 'Pendiente',
+                  'bg-success text-white': pedido.estado === 'Completado',
+                  'bg-danger text-white': pedido.estado === 'Cancelado'
+                }">
+                  {{ pedido.estado || 'Pendiente' }}
+                </span>
+              </div>
+              <div class="card-body">
+                <p class="mb-1"><small><strong>Fecha:</strong> {{ (pedido.fecha_pedido || pedido.created_at) | date:'dd/MM/yyyy HH:mm' }}</small></p>
+                <p class="mb-1"><small><strong>Dirección:</strong> {{ pedido.direccion_envio }}</small></p>
+                <p class="mb-3"><small><strong>Método de Pago:</strong> {{ pedido.metodo_pago }}</small></p>
+
+                <!-- Detalle de Productos -->
+                @if (pedido.detalles && pedido.detalles.length > 0) {
+                  <div class="bg-dark p-3 rounded mb-3">
+                    <h6 class="text-warning mb-2">Productos:</h6>
+                    <ul class="list-unstyled mb-0">
+                      @for (item of pedido.detalles; track item.producto_id) {
+                        <li class="d-flex justify-content-between text-sm py-1 border-bottom border-secondary">
+                          <span>{{ item.nombre || 'Producto #' + item.producto_id }} (x{{ item.cantidad }})</span>
+                          <span class="fw-bold">{{ (item.precio_unitario * item.cantidad) | currency:'EUR' }}</span>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                }
+
+                <div class="text-end text-warning fw-bold fs-5">
+                  Total: {{ pedido.total | currency:'EUR' }}
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

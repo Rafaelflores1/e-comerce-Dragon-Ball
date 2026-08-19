@@ -1,0 +1,101 @@
+<div class="container my-5">
+  <h2 class="mb-4 fw-bold text-center">Resumen de tu Carrito</h2>
+
+  @if (cartService.cartItemsSignal().length === 0) {
+    <div class="text-center my-5 p-5 bg-light rounded shadow-sm">
+      <i class="bi bi-cart-x text-muted display-1"></i>
+      <h3 class="mt-3 text-muted">Tu carrito está vacío</h3>
+      <p class="text-secondary">Parece que aún no has añadido figuras a tu colección.</p>
+      <a routerLink="/productos" class="btn btn-warning btn-lg fw-bold mt-2">
+        Ir al Catálogo
+      </a>
+    </div>
+  } @else {
+    <div class="row g-4">
+      <!-- Tabla de Productos -->
+      <div class="col-lg-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-hover align-middle mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th style="width: 130px;">Cantidad</th>
+                    <th>Subtotal</th>
+                    <th class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (item of cartService.cartItemsSignal(); track item.producto_id) {
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center gap-3">
+                          <img [src]="item.imagen_url" [alt]="item.nombre" style="width: 50px; height: 50px; object-fit: contain;">
+                          <span class="fw-bold text-truncate" style="max-width: 200px;">{{ item.nombre }}</span>
+                        </div>
+                      </td>
+                      <td>{{ item.precio_unitario | currency:'EUR' }}</td>
+                      <td>
+                        <input 
+                          type="number" 
+                          class="form-control form-control-sm text-center" 
+                          [value]="item.cantidad" 
+                          min="1" 
+                          (change)="updateQuantity(item.producto_id, $any($event.target).value)">
+                      </td>
+                      <td class="fw-bold text-success">
+                        {{ (item.precio_unitario * item.cantidad) | currency:'EUR' }}
+                      </td>
+                      <td class="text-center">
+                        <button class="btn btn-outline-danger btn-sm" (click)="removeItem(item.producto_id)" title="Eliminar">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resumen del Pago -->
+      <div class="col-lg-4">
+        <div class="card border-0 shadow-sm p-3">
+          <h4 class="fw-bold mb-3">Resumen de Compra</h4>
+          <hr>
+          <div class="d-flex justify-content-between mb-2 fs-5">
+            <span>Total de Productos:</span>
+            <span class="fw-bold">{{ cartService.totalItems() }}</span>
+          </div>
+          <div class="d-flex justify-content-between mb-4 fs-4">
+            <span class="fw-bold">Total a pagar:</span>
+            <span class="fw-bold text-success">{{ cartService.totalAmount() | currency:'EUR' }}</span>
+          </div>
+
+          @if (!authService.isAuthenticated()) {
+            <div class="alert alert-warning small mb-3">
+              <i class="bi bi-exclamation-triangle-fill me-1"></i>
+              Debes iniciar sesión para completar la compra.
+            </div>
+          }
+
+          <button 
+            class="btn btn-warning btn-lg fw-bold w-100" 
+            [disabled]="isProcessing()" 
+            (click)="procesarPedido()">
+            @if (isProcessing()) {
+              <span class="spinner-border spinner-border-sm me-2" role="status"></span>
+              Procesando...
+            } @else {
+              <i class="bi bi-credit-card me-1"></i> Finalizar Pedido
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

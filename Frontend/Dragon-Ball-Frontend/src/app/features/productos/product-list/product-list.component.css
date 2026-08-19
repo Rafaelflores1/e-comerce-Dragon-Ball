@@ -1,0 +1,41 @@
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 40px 0;
+  font-family: system-ui, sans-serif;
+}
+
+.pagination-btn {
+  padding: 10px 20px;
+  background-color: #facc15;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #111827;
+  transition: background-color 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #eab308;
+}
+
+.pagination-btn:disabled {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.pagination-info {
+  font-weight: 600;
+  color: #4b5563;
+}
+
+.product-image-fixed {
+  width: 100%;
+  height: 250px;       /* 👈 Ajusta esta altura a la que prefieras (ej. 220px, 250px) */
+  object-fit: contain; /* 👈 Usa 'contain' para que se vea entera, o 'cover' para que rellene todo el espacio sin deformarse */
+  background-color: #f8f9fa; /* Un fondo sutil por si la imagen es transparente */
+}
