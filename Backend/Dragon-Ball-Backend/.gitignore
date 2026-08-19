@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+
+# Archivos de entorno con contraseñas y claves (¡SÚPER IMPORTANTE!)
+.env
+
+# Archivos de compilación de Angular y VS Code
+dist/
+.angular/
+.vscode/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
