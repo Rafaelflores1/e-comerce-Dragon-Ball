@@ -1,0 +1,296 @@
+### Pruebas de Productos
+
+@HOST = http://localhost:3000
+
+
+GET {{HOST}}/api/productos
+
+
+###
+
+
+Get {{HOST}}/api/productos/4
+
+
+###
+POST {{HOST}}/api/productos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZW1haWwiOiJkYW5pZWxAZ21haWwuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTkxODk5NH0.29KLtn55w30Nsc2aw4GdGbYYgj20KmjrLNvwRexTu6U
+
+{
+    "nombre": "Vegeta Super Saiyan Blue",
+    "descripcion": "Figura articulada S.H.Figuarts",
+    "precio": 68.50,
+    "stock": 10,
+    "imagen_url": "https://via.palceholder.com/300",
+    "altura_cm": 15.00,
+    "material": "PVC",
+    "categoria_id": 1,
+    "saga_id": 2,
+    "destacado":true
+}
+
+
+###
+PUT {{HOST}}/api/productos/11
+Content-Type: application/json
+
+{
+    "nombre": "Vegeta Ultra Ego",
+    "descripcion": "Figura articulada de vegetta Ultra Ego",
+    "precio": 68.50,
+    "stock": 10,
+    "imagen_url": "https://via.palceholder.com/300",
+    "altura_cm": 15.00,
+    "material": "PVC",
+    "categoria_id": 1,
+    "saga_id": 2,
+    "destacado":true
+}
+
+
+###
+DELETE {{HOST}}/api/productos/11
+
+
+
+### Pruebas Usuarios
+
+
+###
+GET {{HOST}}/api/usuarios
+
+###
+GET {{HOST}}/api/usuarios/1
+
+
+###
+GET {{HOST}}/api/usuarios/email
+
+
+###
+POST {{HOST}}/api/usuarios/register
+Content-Type: application/json
+
+{
+    "nombre": "Daniel",
+    "email": "daniel@gmail.com",
+    "password": "Password1",
+    "telefono": 600112233,
+    "rol": "cliente"
+}
+
+
+###
+POST {{HOST}}/api/usuarios/login
+Content-Type: application/json
+
+{
+    "email": "daniel@gmail.com",
+    "password": "Password1"
+}
+
+###
+PUT {{HOST}}/api/usuarios/6
+Content-Type: application/json
+
+{
+    "nombre": "Eduardo",
+    "email": "daniel@gmail.com",
+    "password": "Password1",
+    "telefono": 600112233,
+    "rol": "cliente"
+}
+
+
+###
+DELETE {{HOST}}/api/usuarios/6
+
+
+###
+GET {{HOST}}/api/usuarios
+Authorization: Bearer goku_vegetta_DB
+
+
+###
+POST {{HOST}}/api/usuarios/register
+Content-Type: application/json
+
+{
+    "nombre": "Picolo",
+    "email": "picolo@namek.com",
+    "password": "Password1",
+    "telefono": 600123456,
+    "rol": "cliente"
+}
+
+###
+POST {{HOST}}/api/usuarios/login
+Content-Type: application/json
+
+{
+    "email": "picolo@namek.com",
+    "password": "Password1"
+}
+
+### Pruebas de Categorias
+
+###
+GET {{HOST}}/api/categorias
+
+###
+GET {{HOST}}/api/categorias/3
+
+###
+POST {{HOST}}/api/categorias
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTQ5NjcxNn0.2XASzFkvHz0U2UB0J1X5uEuZAR0130_VfqeJZpElHm4
+
+{
+    "nombre": "Blokees",
+    "descripcion": "Figura de acción para armar por piezas"
+}
+
+
+
+###
+PUT {{HOST}}/api/categorias/6
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTQ5Nzc0Mn0.vHgbbX0GOFG19Ua_RVC8TnAut3Uvy1TSvfVIkar2jsc 
+
+{
+  "nombre": "bloke",
+  "descripcion": "Figura de acción para armar por piezas"
+}
+
+###
+DELETE {{HOST}}/api/categorias/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTQ5ODExOH0.bEb681SwJA-O5DvfXqQxUOzfvaU4nBoktiJamNev-zY
+
+
+
+###### COMPROBACIONES DE SAGAS
+
+###
+GET {{HOST}}/api/sagas
+
+
+###
+GET {{HOST}}/api/sagas/3
+
+
+###
+POST {{HOST}}/api/sagas
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTU4MTM2MX0.aBSjqW-mnNOO4u5iJOdmyW-o19bJHthH00Cr4VBVPZU
+
+{
+    "nombre": "Saga de Black Friezer",
+    "descripcion": "La llegaga de black Friezer frente a Goku y Veggeta"
+    
+}
+
+###
+PUT {{HOST}}/api/sagas/8
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTU4MTg1Mn0.eem1UBGU9tTnefd2OodkftzcGxehk8KpJwHR5Cy9-ww
+
+{
+    "nombre": "Saga de Black Freezer",
+    "descripcion": " La llegaga de black Friezer frente a Goku y Veggeta "
+}
+
+
+###
+DELETE {{HOST}}/api/sagas/8
+
+
+
+
+################# CREAR PRODUCTO CON IMAGEN
+
+###
+POST {{HOST}}/api/productos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NTkyMjE3MX0.-BdEWypTzcv3KTw1aSWXQ8sRqyQQg1kEsj--KSFMTc4
+Content-Type: multipart/form-data; boundary=MiBoundary
+
+--MiBoundary
+Content-Disposition: form-data; name="imagen"; filename="broly.png"
+Content-Type: image/jpeg
+
+< ./uploads/imagen-proyecto-broly.jpg
+--MiBoundary
+Content-Disposition: form-data; name="nombre"
+
+Figura Broly
+--MiBoundary
+Content-Disposition: form-data; name="precio"
+
+79.99
+--MiBoundary--
+
+
+
+###
+POST {{HOST}}/api/pedidos
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NjA0MzAwMH0.7biDutyWlGFbpX7W5Acj9SUXBjATbXAD5Dg9uYBvpdM
+Content-Type: application/json
+
+{
+  "direccion_envio": "Capsule Corp Tower, C/ Tecnología 42",
+  "metodo_pago": "Tarjeta",
+  "productos": [
+    {
+      "producto_id": 1,
+      "cantidad": 2,
+      "precio_unitario": 64.99
+    },
+    {
+      "producto_id": 3,
+      "cantidad": 1,
+      "precio_unitario": 72.00
+    }
+  ]
+}
+
+
+###
+GET {{HOST}}/api/pedidos/6
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NjA0NTI1N30.lr2tYTAnBn669TASl96mXPkB3T5FYumHeM9vzDPJsko
+
+
+
+
+### GUARDAR NUEVA DIRECCIÓN
+POST {{HOST}}/api/direcciones
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NjA0ODYzNX0.gY7_2-fdWAvKaDN94xr2tEZbxszfAMHx4rsj7zF_alI
+Content-Type: application/json
+
+{
+  "direccion": "Satan City, C/ Central 15",
+  "ciudad": "Satan City",
+  "codigo_postal": "50001",
+  "pais": "España"
+}
+
+### OBTENER MIS DIRECCIONES
+GET {{HOST}}/api/direcciones
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NjA0ODYzNX0.gY7_2-fdWAvKaDN94xr2tEZbxszfAMHx4rsj7zF_alI
+
+### ELIMINAR UNA DIRECCIÓN
+DELETE {{HOST}}/api/direcciones/5
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywiZW1haWwiOiJwaWNvbG9AbmFtZWsuY29tIiwicm9sIjoiY2xpZW50ZSIsImlhdCI6MTc4NjA0ODYzNX0.gY7_2-fdWAvKaDN94xr2tEZbxszfAMHx4rsj7zF_alI
+
+
+
+### Obtener primera página de 5 productos
+GET {{HOST}}/api/productos?limit=5&offset=0
+
+### Filtrar productos por Categoría (ej. Figuras)
+GET {{HOST}}/api/productos?categoria_id=1
+
+### Filtrar productos por Saga y Paginado
+GET {{HOST}}/api/productos?saga_id=2&limit=3&offset=0
+
+### Buscar productos por nombre (ej. Broly)
+GET {{HOST}}/api/productos?nombre=Broly
