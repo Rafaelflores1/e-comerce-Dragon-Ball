@@ -27,26 +27,35 @@ export class ProductosService {
 
   // Obtener catálogo
   async getProductos(filtros: FiltrosProductos = {}): Promise<ProductosResponse> {
-    this.loadingSignal.set(true);
+  this.loadingSignal.set(true);
 
-    let params = new HttpParams();
-    if (filtros.categoria_id) params = params.set('categoria_id', filtros.categoria_id.toString());
-    if (filtros.saga_id) params = params.set('saga_id', filtros.saga_id.toString());
-    if (filtros.nombre) params = params.set('nombre', filtros.nombre);
-    if (filtros.limit) params = params.set('limit', filtros.limit.toString());
-    if (filtros.offset) params = params.set('offset', filtros.offset.toString());
+  let params = new HttpParams();
+  if (filtros.categoria_id) params = params.set('categoria_id', filtros.categoria_id.toString());
+  if (filtros.saga_id) params = params.set('saga_id', filtros.saga_id.toString());
+  if (filtros.nombre) params = params.set('nombre', filtros.nombre);
+  if (filtros.limit) params = params.set('limit', filtros.limit.toString());
+  if (filtros.offset) params = params.set('offset', filtros.offset.toString());
 
-    try {
-      const res = await firstValueFrom(
-        this.http.get<ProductosResponse>(`${this.apiUrl}/productos`, { params })
-      );
-      this.productosSignal.set(res.productos);
-      this.totalProductosSignal.set(res.total);
-      return res;
-    } finally {
-      this.loadingSignal.set(false);
-    }
+  try {
+    const res = await firstValueFrom(
+      this.http.get<ProductosResponse>(`${this.apiUrl}/productos`, { params })
+    );
+
+    const lista = res.productos || [];
+    this.productosSignal.set(lista);
+    // Si res.total es undefined, asigna el tamaño de la lista obtenida
+    this.totalProductosSignal.set(res.total ?? lista.length);
+
+    return res;
+  } catch (error) {
+    console.error('Error al cargar productos:', error);
+    this.productosSignal.set([]);
+    this.totalProductosSignal.set(0);
+    throw error;
+  } finally {
+    this.loadingSignal.set(false);
   }
+}
 
   // Detalle de un producto
   async getProductoById(id: number): Promise<IProducto> {

@@ -23,13 +23,16 @@ export class ProductListComponent implements OnInit {
   searchQuery = signal<string>('');
 
   async ngOnInit(): Promise<void> {
-    // ⚡ LLAMA SOLO A ESTO. NO LLAMES A cargarProductos() aquí.
-    await Promise.all([
-      this.cargarPagina(1), // Esto ya incluye filtros y paginación
+  try {
+    await Promise.allSettled([
+      this.cargarPagina(1),
       this.productosService.getCategorias(),
       this.productosService.getSagas()
     ]);
+  } catch (error) {
+    console.error('Error al inicializar el catálogo:', error);
   }
+}
 
 getImagenUrl(imagenUrl: string | null | undefined): string {
   if (!imagenUrl) return 'assets/placeholder.png';
