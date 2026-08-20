@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/usuarios';
+  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/usuarios';
   private router = inject(Router);
 
 

@@ -8,7 +8,7 @@ import { Idireccion } from '../../shared/interfaces/idireccion';
 })
 export class DireccionesService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/direcciones'; // Tu URL del backend
+  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/direcciones';
 
   // Convertimos la llamada a una Promesa
   async crearDireccion(direccion: Omit<Idireccion, 'id'>): Promise<any> {

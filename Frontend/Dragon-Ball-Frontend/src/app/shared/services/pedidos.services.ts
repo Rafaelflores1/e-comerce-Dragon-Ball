@@ -9,7 +9,7 @@ import { Ipedido } from '../interfaces/ipedido';
 })
 export class PedidosService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/pedidos';
+  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/pedidos';
 
   /**
    * Envía la orden de compra al Backend

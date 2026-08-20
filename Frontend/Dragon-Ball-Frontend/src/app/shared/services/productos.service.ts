@@ -14,7 +14,7 @@ import {
 })
 export class ProductosService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api';
 
   // Signals de estado
   productosSignal = signal<IProducto[]>([]);
