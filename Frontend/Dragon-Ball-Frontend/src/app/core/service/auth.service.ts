@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Iusuario, IAuthResponse } from '../../shared/interfaces/iusuario';
 import { Router } from '@angular/router';
+import {environment} from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/usuarios';
+  private apiUrl = `${environment.apiUrl}/usuarios`;
   private router = inject(Router);
 
 

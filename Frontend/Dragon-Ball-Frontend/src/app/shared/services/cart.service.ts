@@ -1,24 +1,24 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { IProducto } from '../interfaces/iproducto';
 import { IDetallePedido } from '../interfaces/ipedido';
+import { environment } from '../../../environments/environment'
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
+  private apiUrl = `${environment.apiUrl}/carrito`;
   cartItemsSignal = signal<IDetallePedido[]>(this.loadCartFromStorage());
-
-  // Signal derivada: Total de items en el carrito
   totalItems = computed(() => 
     this.cartItemsSignal().reduce((sum, item) => sum + item.cantidad, 0)
   );
 
-  // Signal derivada: Precio total de la compra
+ 
   totalAmount = computed(() => 
     this.cartItemsSignal().reduce((sum, item) => sum + (item.precio_unitario * item.cantidad), 0)
   );
 
-  // Agregar producto al carrito
+
   addToCart(producto: IProducto, cantidad: number = 1): void {
     const currentItems = this.cartItemsSignal();
     const existingIndex = currentItems.findIndex(i => i.producto_id === producto.id);
@@ -42,13 +42,13 @@ export class CartService {
     this.updateCart(updatedCart);
   }
 
-  // Eliminar producto del carrito
+
   removeFromCart(productoId: number): void {
     const updatedCart = this.cartItemsSignal().filter(i => i.producto_id !== productoId);
     this.updateCart(updatedCart);
   }
 
-  // Cambiar cantidad de un producto
+ 
   updateQuantity(productoId: number, cantidad: number): void {
     if (cantidad <= 0) {
       this.removeFromCart(productoId);
@@ -61,12 +61,12 @@ export class CartService {
     this.updateCart(updatedCart);
   }
 
-  // Vaciar carrito
+ 
   clearCart(): void {
     this.updateCart([]);
   }
 
-  // Métodos auxiliares de persistencia
+  
   private updateCart(items: IDetallePedido[]): void {
     this.cartItemsSignal.set(items);
     localStorage.setItem('shopping_cart', JSON.stringify(items));

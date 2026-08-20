@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Ipedido } from '../interfaces/ipedido';
+import { environment } from '../../../environments/environment';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Ipedido } from '../interfaces/ipedido';
 })
 export class PedidosService {
   private http = inject(HttpClient);
-  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/pedidos';
+  private apiUrl = `${environment.apiUrl}/pedidos`;
 
   /**
    * Envía la orden de compra al Backend

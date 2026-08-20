@@ -8,14 +8,14 @@ import {
   ProductosResponse, 
   FiltrosProductos 
 } from '../../shared/interfaces/iproducto';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
   private http = inject(HttpClient);
-  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api';
-
+  private apiUrl = environment.apiUrl;
   // Signals de estado
   productosSignal = signal<IProducto[]>([]);
   totalProductosSignal = signal<number>(0);

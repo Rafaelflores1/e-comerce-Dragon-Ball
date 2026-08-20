@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { Idireccion } from '../../shared/interfaces/idireccion';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DireccionesService {
   private http = inject(HttpClient);
-  private apiUrl = 'e-comerce-dragon-ball-production.up.railway.app/api/direcciones';
+  private apiUrl = `${environment.apiUrl}/direcciones`;
 
   // Convertimos la llamada a una Promesa
   async crearDireccion(direccion: Omit<Idireccion, 'id'>): Promise<any> {
